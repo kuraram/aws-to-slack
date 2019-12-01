@@ -1,0 +1,2 @@
+# codepipline-to-slack
+ruby
