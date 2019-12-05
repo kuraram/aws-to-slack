@@ -6,20 +6,20 @@ require "json"
 
 def codebuild_handler(event:, context:)
 
-	puts "=== event ===\n #{event}\n ==="	# Display event
-	project = event["detail"]["project-name"]
+  puts "=== event ===\n #{event}\n ==="	# Display event
+  project = event["detail"]["project-name"]
   status = event["detail"]["build-status"]
-	additional_info = event["detail"]["additional-information"]
+  additional_info = event["detail"]["additional-information"]
   build_id = additional_info["logs"]["stream-name"]
   log_link = additional_info["logs"]["deep-link"]
-	phases = additional_info["phases"]
-	phase_txt = ""
-	phases.each do | phase |
-		if phase["phase-status"] == "FAILED"
-			phase_txt = phase["phase-context"][0]	# Retrieve error
-		end
-	end
-	codebuild_notifer(build_id, project, status, phase_txt, log_link)
+  phases = additional_info["phases"]
+  phase_txt = ""
+  phases.each do | phase |
+    if phase["phase-status"] == "FAILED"
+      phase_txt = phase["phase-context"][0]	# Retrieve error
+    end
+  end
+  codebuild_notifer(build_id, project, status, phase_txt, log_link)
 
 end
 
@@ -49,11 +49,11 @@ def codebuild_notifer(build_id, project, status, phase_txt, link)
 end
 
 def get_text(status, project)
-	if status == "FAILED"
-		return "<!here> #{project} プロジェクトが失敗しました:cry:"
-	else
-		return "<!here> #{project} プロジェクトが成功しました:blush:"
-	end
+  if status == "FAILED"
+    return "<!here> #{project} プロジェクトが失敗しました:cry:"
+  else
+    return "<!here> #{project} プロジェクトが成功しました:blush:"
+  end
 
 end
 
@@ -62,5 +62,5 @@ def get_color(status)
     return "danger"
   else
     return "good"
-	end
+  end
 end
