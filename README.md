@@ -8,5 +8,5 @@ codepiplineからslackへの通知を行うプログラム
 
 - ビルド失敗時
 
-![state_fail](./pic/state_fail.png)
+  ![state_fail](./pic/state_fail.png)
 
